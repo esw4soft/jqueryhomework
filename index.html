@@ -16,6 +16,7 @@
         body {
             background: #eee;
         }
+
         /* div{
             border: 1px solid gray;
         } */
@@ -29,10 +30,14 @@
 
         </div>
 
-        <div class="row justify-content-center"><!-- 3 -->
-            <div class="col-4"><!-- 4 -->
-                <div id="cart" class="cart card"><!-- 5 -->
-                    <div class="card-body"><!-- 6 -->
+        <div class="row justify-content-center">
+            <!-- 3 -->
+            <div class="col-4">
+                <!-- 4 -->
+                <div id="cart" class="cart card">
+                    <!-- 5 -->
+                    <div class="card-body">
+                        <!-- 6 -->
                         <h3 class="card-title h5">購物車</h3>
                         <table class="table table-lg">
                             <thead>
@@ -47,7 +52,7 @@
 
                             </tbody>
                         </table>
-                         <button class="btn btn-info btn-block">結帳</button>
+                        <button class="btn btn-info btn-block">結帳</button>
                     </div>
                 </div>
             </div>
@@ -76,13 +81,13 @@
             url: "food.json",
             type: "get",
             dataType: "json"
-        }).then(function(res){
+        }).then(function (res) {
             // console.log(res);
             // console.log(res[2].price);
-            
-            var lists ="";
-            for(i=0; i<res.length; i++) {
-                 lists += `
+
+            var lists = "";
+            for (i = 0; i < res.length; i++) {
+                lists += `
                     <div class="col-sm-3">
                         <div class="card">
                             <div class="card-body">
@@ -98,12 +103,12 @@
                         </div>
                     </div>
                 `;
-                 
+
             }
             $("#list").append(lists);
         });
 
-        $("#list").on("click",".add-card", function(){
+        $("#list").on("click", ".add-card", function () {
             let name = $(this).data("name");
             // console.log($(this));
             let price = $(this).data("price");
@@ -116,25 +121,11 @@
             `;
             $("#cart-list").append(item);
         })
-
-        
     </script>
 </body>
 
 </html>
 
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- 待辦 -->
 <!-- 把res的東西裝在一個痊癒變數 再拿去給按鈕用 -->
 <!-- 結帳 -->
