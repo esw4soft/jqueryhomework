@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        body {
+            background: #eee;
+        }
+        /* div{
+            border: 1px solid gray;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 1 -->
+        <div class="row mt-3 mb-3" id="list">
+
+        </div>
+
+        <div class="row justify-content-center"><!-- 3 -->
+            <div class="col-4"><!-- 4 -->
+                <div id="cart" class="cart card"><!-- 5 -->
+                    <div class="card-body"><!-- 6 -->
+                        <h3 class="card-title h5">購物車</h3>
+                        <table class="table table-lg">
+                            <thead>
+
+                                <tr>
+                                    <th class="text-nowrap">品名</th>
+                                    <th class="text-nowrap">單價</th>
+                                    <th style="width:100px;" class="text-nowrap">數量</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-list">
+
+                            </tbody>
+                        </table>
+                         <button class="btn btn-info btn-block">結帳</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $.ajax({
+            url: "food.json",
+            type: "get",
+            dataType: "json"
+        }).then(function(res){
+            // console.log(res);
+            // console.log(res[2].price);
+            
+            var lists ="";
+            for(i=0; i<res.length; i++) {
+                 lists += `
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img class="card-img-top" src="img/${res[i]["image"]}">
+
+                                <h3 class="card-title h5">${res[i]["name"]}</h3>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="text-danger">$${res[i].price}</div>
+                                    <div><a class="btn btn-info text-white add-card" data-name="${res[i].name}" data-price="${res[i]["price"]}"><i class="fas fa-cart-plus"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                 
+            }
+            $("#list").append(lists);
+        });
+
+        $("#list").on("click",".add-card", function(){
+            let name = $(this).data("name");
+            // console.log($(this));
+            let price = $(this).data("price");
+            let item = `
+                <tr>
+                    <td>${name}</td>
+                    <td>${price}</td>
+                    <td><input type="number" class="form-control text-right" value="1"></td>
+                </tr>    
+            `;
+            $("#cart-list").append(item);
+        })
+
+        
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 待辦 -->
+<!-- 把res的東西裝在一個痊癒變數 再拿去給按鈕用 -->
+<!-- 結帳 -->
